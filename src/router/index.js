@@ -5,6 +5,8 @@ const LoginCom = () => import('../components/LoginCom')
 const HomeCom = () => import('../components/HomeCom')
 const HomeWelcome = () => import('../components/HomeWelcome')
 const UserManager = () => import('../components/user/UserManager')
+const RightsList = () => import('../components/authority/RightsList')
+const RolesList = () => import('../components/authority/RolesList')
 
 Vue.use(VueRouter)
 
@@ -31,6 +33,14 @@ const routes = [
       {
         path: '/users',
         component: UserManager
+      },
+      {
+        path: '/rights',
+        component: RightsList
+      },
+      {
+        path: '/roles',
+        component: RolesList
       }
     ]
   }
