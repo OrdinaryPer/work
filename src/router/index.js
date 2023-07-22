@@ -7,6 +7,8 @@ const HomeWelcome = () => import('../components/HomeWelcome')
 const UserManager = () => import('../components/user/UserManager')
 const RightsList = () => import('../components/authority/RightsList')
 const RolesList = () => import('../components/authority/RolesList')
+const GoodsCategory = () => import('../components/goods/GoodsCategory')
+const GoodsParameters = () => import('../components/goods/GoodsParameters')
 
 Vue.use(VueRouter)
 
@@ -41,6 +43,14 @@ const routes = [
       {
         path: '/roles',
         component: RolesList
+      },
+      {
+        path: '/categories',
+        component: GoodsCategory
+      },
+      {
+        path: '/params',
+        component: GoodsParameters
       }
     ]
   }

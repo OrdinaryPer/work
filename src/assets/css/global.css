@@ -23,3 +23,7 @@ body,
 .el-pagination {
   margin-top: 15px;
 }
+
+.cascader-panel {
+  top: 200px !important;
+}
