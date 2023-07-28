@@ -1,10 +1,11 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>商品分类</el-breadcrumb-item>
-    </el-breadcrumb>
+    <main-nav>
+      <template v-slot:otherBreadcrumb>
+        <nav-item>商品管理</nav-item>
+        <nav-item>商品分类</nav-item>
+      </template>
+    </main-nav>
     <el-card>
       <el-row>
         <el-col>
@@ -87,6 +88,9 @@
 </template>
 
 <script>
+import MainNav from '@/components/navigation/MainNav'
+import NavItem from '@/components/navigation/NavItem'
+
 export default {
   data() {
     return {
@@ -221,6 +225,11 @@ export default {
       this.addCategoryForm.cat_level = 0
       this.addCategoryForm.cat_pid = 0
     }
+  },
+
+  components: {
+    MainNav,
+    NavItem
   }
 }
 </script>

@@ -1,10 +1,11 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>参数列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <main-nav>
+      <template v-slot:otherBreadcrumb>
+        <nav-item>商品管理</nav-item>
+        <nav-item>参数列表</nav-item>
+      </template>
+    </main-nav>
     <el-card>
       <el-alert
         title="注意：只允许为第三级分类设置相关参数"
@@ -177,6 +178,9 @@
 </template>
 
 <script>
+import MainNav from '@/components/navigation/MainNav'
+import NavItem from '@/components/navigation/NavItem'
+
 export default {
   data() {
     return {
@@ -407,6 +411,11 @@ export default {
         return '静态属性'
       }
     }
+  },
+
+  components: {
+    MainNav,
+    NavItem
   }
 }
 </script>

@@ -1,10 +1,11 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>订单管理</el-breadcrumb-item>
-      <el-breadcrumb-item>订单列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <main-nav>
+      <template v-slot:otherBreadcrumb>
+        <nav-item>订单管理</nav-item>
+        <nav-item>订单列表</nav-item>
+      </template>
+    </main-nav>
     <el-card shadow="always" :body-style="{ padding: '20px' }">
       <el-row :gutter="20">
         <el-col :span="8" :offset="0">
@@ -96,6 +97,8 @@
 
 <script>
 import citydata from '../../assets/js/citydata.js'
+import MainNav from '@/components/navigation/MainNav'
+import NavItem from '@/components/navigation/NavItem'
 
 export default {
   data() {
@@ -177,6 +180,11 @@ export default {
       this.progressInfo = res.data
       this.addressDialogVisible = true
     }
+  },
+
+  components: {
+    MainNav,
+    NavItem
   }
 }
 </script>

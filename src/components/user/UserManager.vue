@@ -1,12 +1,12 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-  <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-  <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-  </el-breadcrumb>
-
+  <main-nav>
+    <template v-slot:otherBreadcrumb>
+      <nav-item>活动管理</nav-item>
+      <nav-item>活动列表</nav-item>
+      <nav-item>活动详情</nav-item>
+    </template>
+  </main-nav>
   <el-card>
     <el-row :gutter="20">
       <el-col :span="8">
@@ -155,9 +155,12 @@
 </template>
 
 <script>
+
+import MainNav from '@/components/navigation/MainNav'
+import NavItem from '@/components/navigation/NavItem'
 export default {
   data() {
-    var checkEmail = (rule, value, cb) => {
+    const checkEmail = (rule, value, cb) => {
       const regEmail =
         /^[a-zA-Z0-9_-]+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
       if (regEmail.test(value)) {
@@ -166,7 +169,7 @@ export default {
       cb(new Error('请输入合法的邮箱'))
     }
 
-    var checkMobile = (rule, value, cb) => {
+    const checkMobile = (rule, value, cb) => {
       const regMobile =
         /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/
       if (regMobile.test(value)) {
@@ -415,6 +418,10 @@ export default {
       this.selectedRoleId = ''
       this.userInfo = {}
     }
+  },
+  components: {
+    MainNav,
+    NavItem
   }
 }
 </script>

@@ -1,10 +1,11 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>数据统计</el-breadcrumb-item>
-      <el-breadcrumb-item>数据报表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <main-nav>
+      <template v-slot:otherBreadcrumb>
+        <nav-item>数据统计</nav-item>
+        <nav-item>数据报表</nav-item>
+      </template>
+    </main-nav>
     <el-card>
       <div id="main" style="width:750px;height:400px;"></div>
     </el-card>
@@ -14,6 +15,9 @@
 <script>
 import * as echarts from 'echarts'
 import _ from 'lodash'
+import MainNav from '@/components/navigation/MainNav'
+import NavItem from '@/components/navigation/NavItem'
+
 export default {
   data() {
     return {
@@ -82,7 +86,12 @@ export default {
     myChart.setOption(result)
   },
 
-  methods: {}
+  methods: {},
+
+  components: {
+    MainNav,
+    NavItem
+  }
 }
 </script>
 

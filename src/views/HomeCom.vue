@@ -1,5 +1,6 @@
 <template>
   <el-container class="home-container">
+    <!-- 导航栏 -->
     <el-header>
       <div>
         <img src="../assets/shop-logo.jpg" alt="" />
@@ -7,7 +8,9 @@
       </div>
       <el-button @click="logout" type="info">退出</el-button>
     </el-header>
+    <!-- 下方内容区 -->
     <el-container>
+      <!-- 侧边导航栏 -->
       <el-aside :width="isCollapse ? '64px' : '200px'">
         <div class="toggle-button" @click="toggleCollapse">|||</div>
         <el-menu
@@ -20,18 +23,24 @@
           :router="true"
           :default-active="activatePath"
         >
-          <el-submenu :index="item.id + ''" v-for="item in menuList" :key="item.id">
+          <el-submenu :index="item.id + ''"
+            v-for="item in menuList"
+            :key="item.id">
             <template slot="title">
               <i :class="iconItems[item.id]"></i>
               <span>{{ item.authName }}</span>
             </template>
-            <el-menu-item @click="saveNavigationPath('/' + subItem.path)" :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id">
+            <el-menu-item @click="saveNavigationPath('/' + subItem.path)"
+              :index="'/' + subItem.path"
+              v-for="subItem in item.children"
+              :key="subItem.id">
               <i class="el-icon-menu"></i>
               <span>{{subItem.authName}}</span>
             </el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
+      <!-- 正文区 -->
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -79,6 +88,7 @@ export default {
       }
     },
 
+    // 侧边栏宽度切换
     toggleCollapse() {
       this.isCollapse = !this.isCollapse
     },

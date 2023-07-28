@@ -1,10 +1,11 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>商品列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <main-nav>
+      <template v-slot:otherBreadcrumb>
+        <nav-item>商品管理</nav-item>
+        <nav-item>商品列表</nav-item>
+      </template>
+    </main-nav>
     <el-card>
       <el-row :gutter="20">
         <el-col :span="8">
@@ -65,6 +66,9 @@
 </template>
 
 <script>
+import MainNav from '@/components/navigation/MainNav'
+import NavItem from '@/components/navigation/NavItem'
+
 export default {
   data() {
     return {
@@ -125,6 +129,11 @@ export default {
     gotoAddPage() {
       this.$router.push('/goods/add')
     }
+  },
+
+  components: {
+    MainNav,
+    NavItem
   }
 }
 </script>

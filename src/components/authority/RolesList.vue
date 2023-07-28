@@ -1,10 +1,11 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-      <el-breadcrumb-item>角色列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <main-nav>
+      <template v-slot:otherBreadcrumb>
+        <nav-item>权限管理</nav-item>
+        <nav-item>角色列表</nav-item>
+      </template>
+    </main-nav>
     <el-card>
       <el-row>
         <el-col>
@@ -93,6 +94,9 @@
 </template>
 
 <script>
+import MainNav from '@/components/navigation/MainNav'
+import NavItem from '@/components/navigation/NavItem'
+
 export default {
   data() {
     return {
@@ -174,6 +178,11 @@ export default {
       this.setRightDialogVisible = false
       this.$message.success('修改权限成功')
     }
+  },
+
+  components: {
+    MainNav,
+    NavItem
   }
 }
 </script>

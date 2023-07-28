@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 正文区占位 -->
     <router-view></router-view>
   </div>
 </template>

@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const LoginCom = () => import('../components/LoginCom')
-const HomeCom = () => import('../components/HomeCom')
-const HomeWelcome = () => import('../components/HomeWelcome')
+const LoginCom = () => import('../views/LoginCom')
+const HomeCom = () => import('../views/HomeCom')
+const HomeWelcome = () => import('../views/HomeWelcome')
 const UserManager = () => import('../components/user/UserManager')
 const RightsList = () => import('../components/authority/RightsList')
 const RolesList = () => import('../components/authority/RolesList')
