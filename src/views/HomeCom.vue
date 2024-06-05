@@ -1,16 +1,25 @@
 <template>
+  <!-- 页面整体布局 -->
   <el-container class="home-container">
-    <!-- 导航栏 -->
+    <!-- 页眉区域 -->
     <el-header>
       <div>
         <img src="../assets/shop-logo.jpg" alt="" />
-        <span>某某后台管理系统</span>
+        <span>后台管理系统</span>
       </div>
       <el-button @click="logout" type="info">退出</el-button>
     </el-header>
     <!-- 下方内容区 -->
     <el-container>
       <!-- 侧边导航栏 -->
+      <!--
+        unique-opened 是否只保持一个子菜单的展开
+        collapse 是否水平折叠收起菜单
+        collapse-transition 是否开启折叠动画
+        router 是否使用 vue-router 的模式，启用该模式会在激活
+          导航时以 index 作为 path 进行路由跳转
+        default-active 当前激活菜单的 index
+       -->
       <el-aside :width="isCollapse ? '64px' : '200px'">
         <div class="toggle-button" @click="toggleCollapse">|||</div>
         <el-menu
@@ -23,19 +32,22 @@
           :router="true"
           :default-active="activatePath"
         >
-          <el-submenu :index="item.id + ''"
+          <el-submenu
             v-for="item in menuList"
-            :key="item.id">
+            :index="item.ps_id + ''"
+            :key="item.ps_id">
+            <!-- element-ui 文档固定写法 -->
             <template slot="title">
-              <i :class="iconItems[item.id]"></i>
-              <span>{{ item.authName }}</span>
+              <i :class="iconItems[item.ps_id]"></i>
+              <span>{{ item.ps_name }}</span>
             </template>
-            <el-menu-item @click="saveNavigationPath('/' + subItem.path)"
-              :index="'/' + subItem.path"
+            <el-menu-item
               v-for="subItem in item.children"
-              :key="subItem.id">
+              @click="saveNavigationPath('/' + subItem.ps_api_path)"
+              :index="'/' + subItem.ps_api_path"
+              :key="subItem.ps_id">
               <i class="el-icon-menu"></i>
-              <span>{{subItem.authName}}</span>
+              <span>{{subItem.ps_name}}</span>
             </el-menu-item>
           </el-submenu>
         </el-menu>
@@ -73,6 +85,7 @@ export default {
     // 获取所有侧边栏菜单信息
     async getMenuList() {
       const { data: res } = await this.$http.get('menus')
+      console.log(res)
       if (res.meta.status !== 200) {
         return this.$message.error(res.meta.msg)
       }
@@ -83,7 +96,7 @@ export default {
         'el-icon-help', 'el-icon-picture-outline']
       let i = 0
       for (const item of this.menuList) {
-        this.iconItems[item.id] = icons[i++]
+        this.iconItems[item.ps_id] = icons[i++]
         // console.log(item.id)
       }
     },
