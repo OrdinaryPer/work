@@ -1,20 +1,3 @@
-一个学习 Vue2 的练手项目
+### 一个练习的项目
 
-安装
-
-```
-npm install
-```
-
-启动
-
-```
-npm run serve
-```
-
-打包
-
-```
-npm run build
-```
-
+使用了 vue2 和 element-ui。
