@@ -16,7 +16,8 @@ import 'quill/dist/quill.bubble.css' // for bubble theme
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-axios.defaults.baseURL = 'http://localhost:8888/api/private/v1/'
+// 后端地址
+axios.defaults.baseURL = 'http://localhost:8080/shop/'
 // 发起请求时，加上 Authorization 请求头
 axios.interceptors.request.use(config => {
   NProgress.start()
@@ -25,6 +26,7 @@ axios.interceptors.request.use(config => {
   // config.data = JSON.stringify(config.data)
   return config
 })
+
 axios.interceptors.response.use(config => {
   NProgress.done()
   return config

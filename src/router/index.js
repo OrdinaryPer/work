@@ -80,8 +80,9 @@ const router = new VueRouter({
   routes
 })
 
+// 每次跳转之前判断是否有 token，否则返回登录页面
 router.beforeEach((to, from, next) => {
-  console.log(to)
+  // console.log(to)
   if (to.path !== '/login') {
     const token = window.sessionStorage.getItem('token')
     if (!token) {

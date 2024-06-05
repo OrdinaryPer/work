@@ -290,7 +290,7 @@ export default {
             attr_name: this.addForm.attr_name,
             attr_sel: this.activeName
           })
-        if (res.meta.status !== 201) {
+        if (res.meta.status !== 200) {
           return this.$message.error('添加参数失败')
         }
         this.$message.success('添加参数成功')
@@ -300,6 +300,7 @@ export default {
     },
 
     async showEditDialog(attrId) {
+      console.log(attrId, this.categoryId)
       const { data: res } = await this.$http
         .get(`categories/${this.categoryId}/attributes/${attrId}`, {
           params: {
@@ -311,6 +312,7 @@ export default {
       }
       this.editForm = res.data
       this.editDialogVisible = true
+      // console.log(res)
     },
 
     editDialogClosed() {
