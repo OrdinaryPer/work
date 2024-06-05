@@ -24,7 +24,7 @@
         <template slot="isValidate" slot-scope="scope">
           <i class="el-icon-success"
             style="color: lightgreen"
-            v-if="scope.row.cat_deleted === false"></i>
+            v-if="scope.row.cat_deleted === 0"></i>
           <i class="el-icon-error" style="color: red" v-else></i>
         </template>
         <template slot="sort" slot-scope="scope">
@@ -35,8 +35,11 @@
           <el-tag type="warning" size="mini"
             v-else>三级</el-tag>
         </template>
-        <template slot="operation" slot-scope="">
-          <el-button type="primary" icon="el-icon-edit" size="mini">
+        <template slot="operation" slot-scope="scope">
+          <el-button type="primary"
+            icon="el-icon-edit"
+            size="mini"
+            @click="updateCategory(scope.row)">
             编辑
           </el-button>
           <el-button type="danger" icon="el-icon-delete" size="mini">
@@ -160,6 +163,7 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error('分类数据获取失败')
       }
+      console.log(res)
       this.categoryList = res.data.result
       this.categoryTotal = res.data.total
     },
@@ -224,6 +228,10 @@ export default {
       this.selectedKeys = []
       this.addCategoryForm.cat_level = 0
       this.addCategoryForm.cat_pid = 0
+    },
+
+    updateCategory(row) {
+      console.log(row)
     }
   },
 

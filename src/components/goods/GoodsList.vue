@@ -19,21 +19,29 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" @click="gotoAddPage">添加商品</el-button>
+          <el-button
+            type="primary"
+            @click="gotoAddPage">添加商品</el-button>
         </el-col>
       </el-row>
-      <el-table :data="goodsList"
+      <el-table
+        :data="goodsList"
         :border="true"
         :stripe="true">
         <el-table-column type="index"></el-table-column>
-        <el-table-column label="商品名称" prop="goods_name"></el-table-column>
-        <el-table-column label="商品价格（元）"
+        <el-table-column
+          label="商品名称"
+          prop="goods_name"></el-table-column>
+        <el-table-column
+          label="商品价格（元）"
           prop="goods_price"
           width="130px"></el-table-column>
-        <el-table-column label="商品重量"
+        <el-table-column
+          label="商品重量"
           prop="goods_weight"
           width="80px"></el-table-column>
-        <el-table-column label="创建时间"
+        <el-table-column
+          label="创建时间"
           prop="add_time"
           width="160px">
           <template slot-scope="scope">
@@ -42,10 +50,13 @@
         </el-table-column>
         <el-table-column label="操作" width="176px">
           <template slot-scope="scope">
-            <el-button icon="el-icon-edit"
+            <el-button
+              icon="el-icon-edit"
               type="primary"
-              size="mini">修改</el-button>
-            <el-button icon="el-icon-delete"
+              size="mini"
+              @click="showGoodsInfoDialog(scope.row)">修改</el-button>
+            <el-button
+              icon="el-icon-delete"
               type="danger"
               size="mini"
               @click="removeGoodById(scope.row.goods_id)">删除</el-button>
@@ -62,6 +73,32 @@
         :total="goodsTotal">
     </el-pagination>
     </el-card>
+    <!-- 修改商品信息对话框 -->
+    <el-dialog
+      title="商品信息"
+      :visible.sync="showGoodsInfoDialogVisible">
+      <el-form :model="theGoodInfo">
+        <el-form-item
+          label="商品名称"
+          prop="goods_name">
+          <el-input v-model="theGoodInfo.goods_name"></el-input>
+        </el-form-item>
+        <el-form-item
+          label="商品价格（元）"
+          prop="goods_price">
+          <el-input v-model="theGoodInfo.goods_price"></el-input>
+        </el-form-item>
+        <el-form-item
+          label="商品重量"
+          prop="goods_weight">
+          <el-input v-model="theGoodInfo.goods_weight"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="showGoodsInfoDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="updateGoodInfo">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -78,7 +115,9 @@ export default {
         pagesize: 5
       },
       goodsList: [],
-      goodsTotal: 0
+      goodsTotal: 0,
+      showGoodsInfoDialogVisible: false,
+      theGoodInfo: {}
     }
   },
 
@@ -128,6 +167,23 @@ export default {
 
     gotoAddPage() {
       this.$router.push('/goods/add')
+    },
+
+    showGoodsInfoDialog(good) {
+      this.theGoodInfo = good
+      this.showGoodsInfoDialogVisible = true
+    },
+
+    async updateGoodInfo() {
+      // console.log(this.theGoodInfo)
+      const { data: res } = await this.$http
+        .put(`goods/${this.theGoodInfo.goods_id}`, this.theGoodInfo)
+      if (res.meta.status !== 200) {
+        return this.$message.error(res.meta.msg)
+      }
+      this.getGoodsList()
+      this.showGoodsInfoDialogVisible = false
+      this.$message.success('修改商品信息成功')
     }
   },
 

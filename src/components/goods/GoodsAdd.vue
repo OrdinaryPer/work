@@ -178,7 +178,7 @@ export default {
       },
       manyTableData: [],
       onlyTableData: [],
-      uploadURL: 'http://localhost:8888/api/private/v1/upload',
+      uploadURL: 'http://localhost:8080/shop/upload',
       headersObject: {
         Authorization: window.sessionStorage.getItem('token')
       },
@@ -268,7 +268,11 @@ export default {
           return this.$message.error('请填写必要的表单项')
         }
         const form = _.cloneDeep(this.addForm)
+        // console.log(form)
         form.goods_cat = form.goods_cat.join(',')
+        // console.log(form.goods_cat)
+        // 属性
+        console.log(this.manyTableData)
         this.manyTableData.forEach(item => {
           const newInfo = {
             attr_id: item.attr_id,
@@ -276,7 +280,7 @@ export default {
           }
           this.addForm.attrs.push(newInfo)
         })
-        console.log(this.manyTableData)
+        // console.log(this.manyTableData)
         this.onlyTableData.forEach(item => {
           const newInfo = {
             attr_id: item.attr_id,
@@ -285,10 +289,10 @@ export default {
           this.addForm.attrs.push(newInfo)
         })
         form.attrs = this.addForm.attrs
-        // console.log(form)
+        console.log(form)
         const { data: res } = await this.$http.post('goods', form)
-        console.log(res)
-        if (res.meta.status !== 201) {
+        // console.log(res)
+        if (res.meta.status !== 200) {
           return this.$message.error(res.meta.msg)
         }
         this.$message.success('添加商品成功')
