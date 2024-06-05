@@ -1,1 +1,1 @@
-一个练习 vue2 和 elment-ui 的项目
+一个练习 Vue2 和 element-ui 的项目
