@@ -17,7 +17,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 // 后端地址
-axios.defaults.baseURL = 'http://192.168.200.134:8080/shop/'
+axios.defaults.baseURL = 'http://localhost:8080/shop/'
 // 发起请求时，加上 Authorization 请求头
 axios.interceptors.request.use(config => {
   NProgress.start()
